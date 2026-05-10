@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import InfoSection from './components/InfoSection';
@@ -11,6 +11,14 @@ import ContactModal from './components/ContactModal';
 const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState("Agende sua Análise Gratuita");
+
+  // Mark root as ready after first paint (works with critical CSS in index.html)
+  useEffect(() => {
+    const root = document.getElementById('root');
+    if (root && !root.classList.contains('ready')) {
+      requestAnimationFrame(() => root.classList.add('ready'));
+    }
+  }, []);
 
   const openModal = (title?: string) => {
     if (title) setModalTitle(title);
@@ -57,6 +65,7 @@ const App: React.FC = () => {
 
       <Footer />
 
+      {/* Modal only renders DOM when open (already returns null when closed) */}
       <ContactModal 
         isOpen={isModalOpen} 
         onClose={closeModal} 

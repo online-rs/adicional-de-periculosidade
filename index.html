@@ -4,25 +4,65 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Adicional de Periculosidade - Operadores de Empilhadeira</title>
+    <meta name="description" content="Operador de empilhadeira GLP: garanta o Adicional de Periculosidade (30%) por troca de gás. Tema 87 TST. Análise gratuita." />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e3a8a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v19'/%3E%3Cpath d='M5 10h14'/%3E%3Cpath d='M5 21h14'/%3E%3Cpath d='M19 21a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h14z'/%3E%3C/svg%3E" type="image/svg+xml" />
+
+    <!-- Preconnect to ALL critical origins FIRST -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+    <link rel="preconnect" href="https://aistudiocdn.com" crossorigin />
+
+    <!-- Critical inline CSS — Hero renders without waiting for Tailwind -->
+    <style>
+      /* Prevent FOUC: hide until Tailwind loads */
+      #root { opacity: 0; transition: opacity 0.15s ease-in; }
+      #root.ready { opacity: 1; }
+
+      /* Hero background — pure CSS, no external image needed */
+      .hero-bg {
+        background: linear-gradient(135deg, #111827 0%, #1a2e50 40%, #162340 70%, #111827 100%);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-bg::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(ellipse at 20% 50%, rgba(30, 58, 138, 0.35) 0%, transparent 60%),
+          radial-gradient(ellipse at 80% 20%, rgba(217, 119, 6, 0.06) 0%, transparent 50%);
+        pointer-events: none;
+      }
+      .hero-bg::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2l4 3-4 3zM0 20h2v-4l-4 3 4 3v-4z'/%3E%3C/g%3E%3C/svg%3E");
+        pointer-events: none;
+      }
+    </style>
+
+    <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
-              sans: ['"Open Sans"', 'sans-serif'],
-              serif: ['"Merriweather"', 'serif'],
+              sans: ['"Open Sans"', 'system-ui', 'sans-serif'],
+              serif: ['"Merriweather"', 'Georgia', 'serif'],
             },
             colors: {
               navy: {
+                50: '#eff6ff',
+                100: '#dbeafe',
                 800: '#1e3a8a',
                 900: '#111827',
               },
               gold: {
+                50: '#fffbeb',
+                100: '#fef3c7',
                 500: '#d97706',
                 600: '#b45309',
               },
@@ -30,7 +70,18 @@
           }
         }
       }
+      // Reveal after Tailwind is ready
+      document.addEventListener('DOMContentLoaded', () => {
+        requestAnimationFrame(() => {
+          const root = document.getElementById('root');
+          if (root) root.classList.add('ready');
+        });
+      });
     </script>
+
+    <!-- Google Fonts — only weights actually used, display=swap -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+
   <script type="importmap">
 {
   "imports": {
@@ -43,6 +94,6 @@
 </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script> 
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
